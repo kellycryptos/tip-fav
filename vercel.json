@@ -1,21 +1,8 @@
 {
-  "version": 2,
-  "builds": [
+  "rewrites": [
     {
-      "src": "package.json",
-      "use": "@vercel/next"
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/"
-    }
-  ],
-  "env": {
-    "NEXT_PUBLIC_APP_URL": "https://tip-fav.vercel.app",
-    "NEXT_PUBLIC_CHAIN_ID": "8453",
-    "NEXT_PUBLIC_CONTRACT_ADDRESS": "",
-    "NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID": ""
-  }
+  ]
 }

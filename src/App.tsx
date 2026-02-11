@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import sdk from '@farcaster/frame-sdk';
 import { WalletConnect } from './components/WalletConnect';
 import { TipForm } from './components/TipForm';
 import { CreatorProfile } from './components/CreatorProfile';
@@ -9,6 +10,22 @@ import { cn } from './lib/utils';
 
 export default function App() {
     const [activeTab, setActiveTab] = useState<'tip' | 'profile' | 'leaderboard'>('tip');
+    const [isSDKLoaded, setIsSDKLoaded] = useState(false);
+
+    useEffect(() => {
+        const load = async () => {
+            try {
+                await sdk.actions.ready();
+                setIsSDKLoaded(true);
+            } catch (error) {
+                console.error('Failed to initialize Farcaster SDK:', error);
+            }
+        };
+        if (sdk && !isSDKLoaded) {
+            load();
+        }
+    }, [isSDKLoaded]);
+
 
     return (
         <ToastProvider>
