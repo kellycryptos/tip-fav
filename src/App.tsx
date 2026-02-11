@@ -112,7 +112,6 @@ export default function App() {
                                     creatorAddress="0x0000000000000000000000000000000000000000"
                                     creatorName="Creator"
                                     onTipSuccess={(amount, token) => {
-                                        // Start of Selection
                                         const event = new CustomEvent('show-toast', { detail: { message: `Successfully tipped ${amount} ${token}!`, type: 'success' } });
                                         window.dispatchEvent(event);
                                     }}

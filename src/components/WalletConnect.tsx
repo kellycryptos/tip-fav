@@ -1,8 +1,8 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useAccount, useConnect, useDisconnect } from 'wagmi';
-import { injected } from 'wagmi/connectors';
+
 import { formatAddress } from '@/lib/utils';
 import { motion } from 'framer-motion';
 
@@ -10,7 +10,7 @@ export function WalletConnect() {
   const { address, isConnected } = useAccount();
   const { connect, isPending: isConnecting, connectors } = useConnect();
   const { disconnect } = useDisconnect();
-  
+
   const [showDisconnect, setShowDisconnect] = useState(false);
 
   if (isConnected && address) {
@@ -25,7 +25,7 @@ export function WalletConnect() {
           <div className="w-2 h-2 bg-green-400 rounded-full"></div>
           {formatAddress(address)}
         </motion.button>
-        
+
         {showDisconnect && (
           <motion.div
             initial={{ opacity: 0, y: -10 }}

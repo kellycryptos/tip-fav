@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useAccount, useWaitForTransactionReceipt, useWriteContract } from 'wagmi';
 import { parseEther } from 'viem';
 import { motion, AnimatePresence } from 'framer-motion';
-import { cn, formatEth, sleep } from '@/lib/utils';
+import { cn, formatEth } from '@/lib/utils';
 import { CheckCircleIcon, ExclamationTriangleIcon, ArrowPathIcon } from '@heroicons/react/24/outline';
 import { tippingContractABI, TIPPING_CONTRACT_ADDRESS } from '@/lib/contract';
 
@@ -21,28 +21,28 @@ const TIP_PRESETS = [
 ];
 
 export function TipForm({ creatorAddress, creatorName, onTipSuccess }: TipFormProps) {
-  const { address, isConnected } = useAccount();
+  const { isConnected } = useAccount();
   const [amount, setAmount] = useState('');
   const [message, setMessage] = useState('');
   const [isCustomAmount, setIsCustomAmount] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
 
   const { writeContract, data: hash, isPending, error } = useWriteContract();
-  
+
   const { isLoading: isConfirming, isSuccess } = useWaitForTransactionReceipt({
     hash,
   });
 
   const handleSubmit = async () => {
     if (!isConnected || !amount) return;
-    
+
     // Validate amount
     const amountNum = parseFloat(amount);
     if (isNaN(amountNum) || amountNum <= 0) {
       console.error('Invalid amount');
       return;
     }
-    
+
     // Validate creator address
     if (!creatorAddress || creatorAddress === '0x0000000000000000000000000000000000000000') {
       console.error('Invalid creator address');
@@ -116,7 +116,7 @@ export function TipForm({ creatorAddress, creatorName, onTipSuccess }: TipFormPr
   return (
     <div className="bg-gray-800/50 backdrop-blur-xl border border-gray-700/50 rounded-2xl p-6">
       <h3 className="text-xl font-bold text-white mb-4">Tip {creatorName}</h3>
-      
+
       {/* Tip Presets */}
       <div className="grid grid-cols-3 gap-3 mb-6">
         {TIP_PRESETS.map((preset) => (
@@ -242,7 +242,7 @@ export function TipForm({ creatorAddress, creatorName, onTipSuccess }: TipFormPr
             <div className="flex items-center gap-2">
               <ArrowPathIcon className="w-4 h-4 text-blue-400 animate-spin" />
               <span className="text-blue-300 text-sm">
-                Transaction pending... 
+                Transaction pending...
                 <a
                   href={`https://basescan.org/tx/${hash}`}
                   target="_blank"

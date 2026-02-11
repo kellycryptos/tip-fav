@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { formatAddress, formatEth, getTimeAgo, shortenUsername } from '@/lib/utils';
+import { formatEth, shortenUsername } from '@/lib/utils';
 import { TrophyIcon, FireIcon, CalendarIcon } from '@heroicons/react/24/outline';
 
 interface LeaderboardEntry {
@@ -137,11 +137,10 @@ export function Leaderboard({ timeFrame = '7d' }: LeaderboardProps) {
             <button
               key={tf.id}
               onClick={() => setActiveTimeFrame(tf.id as any)}
-              className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
-                activeTimeFrame === tf.id
+              className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${activeTimeFrame === tf.id
                   ? 'bg-purple-600 text-white'
                   : 'bg-gray-700/50 text-gray-300 hover:bg-gray-700 hover:text-white'
-              }`}
+                }`}
             >
               {tf.label}
             </button>
@@ -173,7 +172,7 @@ export function Leaderboard({ timeFrame = '7d' }: LeaderboardProps) {
                     <div className="flex items-center justify-center w-12 h-12">
                       {getRankIcon(creator.rank)}
                     </div>
-                    
+
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center text-white font-bold">
                         {creator.displayName.charAt(0).toUpperCase()}
