@@ -20,12 +20,12 @@ export const tippingContractABI = parseAbi([
 ]);
 
 // Contract address - will be set after deployment
-export const TIPPING_CONTRACT_ADDRESS = process.env.NEXT_PUBLIC_TIPPING_CONTRACT_ADDRESS as `0x${string}`;
+export const TIPPING_CONTRACT_ADDRESS = import.meta.env.VITE_TIPPING_CONTRACT_ADDRESS as `0x${string}`;
 
 // Initialize public client for read operations
 export const publicClient = createPublicClient({
   chain: base,
-  transport: http(process.env.NEXT_PUBLIC_BASE_RPC_URL),
+  transport: http(import.meta.env.VITE_BASE_RPC_URL),
 });
 
 // Helper function to encode tip function call
