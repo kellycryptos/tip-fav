@@ -35,6 +35,8 @@ interface ITipping {
 
     function getRecentTips(address creator, uint256 limit) external view returns (Tip[] memory);
     
+    function getTipCount(address creator) external view returns (uint256);
+
     struct Tip {
         address tipper;
         address creator;

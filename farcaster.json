@@ -1,32 +1,31 @@
 {
-  "name": "TIP FAV",
-  "icon": "https://tip-fav.vercel.app/icon.png",
-  "home": "https://tip-fav.vercel.app",
-  "frames": [
-    {
-      "label": "Tip Creator",
-      "action": {
-        "type": "post",
-        "url": "https://tip-fav.vercel.app/frames/tip"
-      }
-    },
-    {
-      "label": "View Profile",
-      "action": {
-        "type": "post",
-        "url": "https://tip-fav.vercel.app/frames/profile"
-      }
-    },
-    {
-      "label": "Leaderboard",
-      "action": {
-        "type": "post",
-        "url": "https://tip-fav.vercel.app/frames/leaderboard"
-      }
-    }
-  ],
-  "meta": {
-    "description": "Tip your favorite Farcaster creators instantly with ETH or USDC",
-    "image": "https://tip-fav.vercel.app/og-image.png"
+  "accountAssociation": {
+    "header": "",
+    "payload": "",
+    "signature": ""
+  },
+  "miniapp": {
+    "version": "1",
+    "name": "TIP FAV",
+    "homeUrl": "https://tip-fav.vercel.app",
+    "iconUrl": "https://tip-fav.vercel.app/icon.png",
+    "splashImageUrl": "https://tip-fav.vercel.app/splash.png",
+    "splashBackgroundColor": "#000000",
+    "webhookUrl": "https://tip-fav.vercel.app/api/webhook",
+    "subtitle": "Instant Farcaster Tipping",
+    "description": "TIP FAV enables seamless on-chain tipping directly from Farcaster. Tip your favorite creators instantly with ETH or USDC in a truly decentralized way. No intermediaries, just pure value transfer between Farcaster users. Experience the future of social commerce where every tip strengthens the creator economy.",
+    "screenshotUrls": [
+      "https://tip-fav.vercel.app/screenshot1.png",
+      "https://tip-fav.vercel.app/screenshot2.png",
+      "https://tip-fav.vercel.app/screenshot3.png"
+    ],
+    "primaryCategory": "social",
+    "tags": ["tipping", "farcaster", "crypto", "base", "web3", "social-commerce"],
+    "heroImageUrl": "https://tip-fav.vercel.app/hero.png",
+    "tagline": "Tip creators instantly",
+    "ogTitle": "TIP FAV - Farcaster Tipping App",
+    "ogDescription": "Tip your favorite Farcaster creators instantly with ETH or USDC. Decentralized, trustless, and seamless.",
+    "ogImageUrl": "https://tip-fav.vercel.app/og-image.png",
+    "noindex": true
   }
 }

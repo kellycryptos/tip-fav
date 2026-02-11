@@ -1,0 +1,16 @@
+{
+    "accountAssociation": {
+        "header": "eyJmaWQiOjkxOTkwOCwidHlwZSI6ImN1c3RvZHkiLCJrZXkiOiJMHJ8... (placeholder - needs real signature)",
+        "payload": "eyJkb21haW4iOiJ0aXAtZmF2LnZlcmNlbC5hcHAifQ",
+        "signature": "MHhk... (placeholder - needs real signature)"
+    },
+    "frame": {
+        "version": "1",
+        "name": "TIP FAV",
+        "iconUrl": "https://tip-fav.vercel.app/icon.png",
+        "homeUrl": "https://tip-fav.vercel.app",
+        "splashImageUrl": "https://tip-fav.vercel.app/splash.png",
+        "splashBackgroundColor": "#000000",
+        "webhookUrl": "https://tip-fav.vercel.app/api/webhook"
+    }
+}

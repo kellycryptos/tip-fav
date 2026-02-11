@@ -6,6 +6,7 @@ import { parseEther } from 'viem';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn, formatEth, sleep } from '@/lib/utils';
 import { CheckCircleIcon, ExclamationTriangleIcon, ArrowPathIcon } from '@heroicons/react/24/outline';
+import { tippingContractABI, TIPPING_CONTRACT_ADDRESS } from '@/lib/contract';
 
 interface TipFormProps {
   creatorAddress: `0x${string}`;
@@ -34,24 +35,24 @@ export function TipForm({ creatorAddress, creatorName, onTipSuccess }: TipFormPr
 
   const handleSubmit = async () => {
     if (!isConnected || !amount) return;
+    
+    // Validate amount
+    const amountNum = parseFloat(amount);
+    if (isNaN(amountNum) || amountNum <= 0) {
+      console.error('Invalid amount');
+      return;
+    }
+    
+    // Validate creator address
+    if (!creatorAddress || creatorAddress === '0x0000000000000000000000000000000000000000') {
+      console.error('Invalid creator address');
+      return;
+    }
 
     try {
       writeContract({
-        address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS as `0x${string}`,
-        abi: [
-          {
-            inputs: [
-              { name: 'creator', type: 'address' },
-              { name: 'token', type: 'address' },
-              { name: 'amount', type: 'uint256' },
-              { name: 'message', type: 'string' }
-            ],
-            name: 'tip',
-            outputs: [],
-            stateMutability: 'payable',
-            type: 'function'
-          }
-        ],
+        address: TIPPING_CONTRACT_ADDRESS,
+        abi: tippingContractABI,
         functionName: 'tip',
         args: [creatorAddress, '0x0000000000000000000000000000000000000000', parseEther(amount), message],
         value: parseEther(amount)
@@ -191,13 +192,13 @@ export function TipForm({ creatorAddress, creatorName, onTipSuccess }: TipFormPr
 
       {/* Submit Button */}
       <motion.button
-        whileHover={{ scale: isConnected && amount ? 1.02 : 1 }}
-        whileTap={{ scale: isConnected && amount ? 0.98 : 1 }}
+        whileHover={{ scale: isConnected && amount && !isPending && !isConfirming ? 1.02 : 1 }}
+        whileTap={{ scale: isConnected && amount && !isPending && !isConfirming ? 0.98 : 1 }}
         onClick={handleSubmit}
         disabled={!isConnected || !amount || isPending || isConfirming}
         className={cn(
           'w-full py-4 rounded-lg font-bold text-lg transition-all duration-200 flex items-center justify-center gap-2',
-          isConnected && amount
+          isConnected && amount && !isPending && !isConfirming
             ? 'bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white shadow-lg hover:shadow-xl'
             : 'bg-gray-700 text-gray-400 cursor-not-allowed'
         )}
