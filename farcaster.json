@@ -1,0 +1,32 @@
+{
+  "name": "TIP FAV",
+  "icon": "https://tip-fav.vercel.app/icon.png",
+  "home": "https://tip-fav.vercel.app",
+  "frames": [
+    {
+      "label": "Tip Creator",
+      "action": {
+        "type": "post",
+        "url": "https://tip-fav.vercel.app/frames/tip"
+      }
+    },
+    {
+      "label": "View Profile",
+      "action": {
+        "type": "post",
+        "url": "https://tip-fav.vercel.app/frames/profile"
+      }
+    },
+    {
+      "label": "Leaderboard",
+      "action": {
+        "type": "post",
+        "url": "https://tip-fav.vercel.app/frames/leaderboard"
+      }
+    }
+  ],
+  "meta": {
+    "description": "Tip your favorite Farcaster creators instantly with ETH or USDC",
+    "image": "https://tip-fav.vercel.app/og-image.png"
+  }
+}
