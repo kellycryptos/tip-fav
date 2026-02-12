@@ -39,6 +39,25 @@
     "iconUrl": "https://tip-fav.vercel.app/icon.svg",
     "splashImageUrl": "https://tip-fav.vercel.app/splash.svg",
     "splashBackgroundColor": "#0f172a",
-    "webhookUrl": "https://tip-fav.vercel.app/api/webhook"
+    "webhookUrl": "https://tip-fav.vercel.app/api/webhook",
+    "subtitle": "Instant Creator Tips",
+    "description": "Send and receive crypto tips instantly inside Farcaster. A fast and simple way to support your favorite creators.",
+    "primaryCategory": "finance",
+    "tags": [
+      "tipping",
+      "web3",
+      "finance",
+      "creators"
+    ],
+    "tagline": "Support creators instantly",
+    "ogTitle": "TIP FAV Mini App",
+    "ogDescription": "Send crypto tips easily inside Farcaster.",
+    "ogImageUrl": "https://tip-fav.vercel.app/og-image.png",
+    "heroImageUrl": "https://tip-fav.vercel.app/hero.png",
+    "screenshotUrls": [
+      "https://tip-fav.vercel.app/screenshot1.png",
+      "https://tip-fav.vercel.app/screenshot2.png"
+    ],
+    "castShareUrl": "https://tip-fav.vercel.app"
   }
 }
