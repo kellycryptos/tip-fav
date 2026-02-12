@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import sdk from '@farcaster/frame-sdk';
+import sdk from '@farcaster/miniapp-sdk';
 import { WalletConnect } from './components/WalletConnect';
 import { TipForm } from './components/TipForm';
 import { CreatorProfile } from './components/CreatorProfile';
@@ -13,18 +13,20 @@ export default function App() {
     const [isSDKLoaded, setIsSDKLoaded] = useState(false);
 
     useEffect(() => {
-        const load = async () => {
-            try {
-                await sdk.actions.ready();
-                setIsSDKLoaded(true);
-            } catch (error) {
-                console.error('Failed to initialize Farcaster SDK:', error);
+        const init = async () => {
+            if (typeof window !== 'undefined') {
+                try {
+                    console.log("Calling sdk.actions.ready()");
+                    await sdk.actions.ready();
+                    setIsSDKLoaded(true);
+                } catch (err) {
+                    console.error("Farcaster ready error:", err);
+                }
             }
         };
-        if (sdk && !isSDKLoaded) {
-            load();
-        }
-    }, [isSDKLoaded]);
+
+        init();
+    }, []);
 
 
     return (
