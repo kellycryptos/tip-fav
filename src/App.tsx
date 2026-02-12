@@ -10,7 +10,6 @@ import { cn } from './lib/utils';
 
 export default function App() {
     const [activeTab, setActiveTab] = useState<'tip' | 'profile' | 'leaderboard'>('tip');
-    const [isSDKLoaded, setIsSDKLoaded] = useState(false);
 
     useEffect(() => {
         const init = async () => {
@@ -18,7 +17,6 @@ export default function App() {
                 try {
                     console.log("Calling sdk.actions.ready()");
                     await sdk.actions.ready();
-                    setIsSDKLoaded(true);
                 } catch (err) {
                     console.error("Farcaster ready error:", err);
                 }
