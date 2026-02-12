@@ -1,6 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { sdk } from '@farcaster/miniapp-sdk';
 import { WalletConnect } from './components/WalletConnect';
 import { TipForm } from './components/TipForm';
 import { CreatorProfile } from './components/CreatorProfile';
@@ -10,24 +9,6 @@ import { cn } from './lib/utils';
 
 export default function App() {
     const [activeTab, setActiveTab] = useState<'tip' | 'profile' | 'leaderboard'>('tip');
-
-    useEffect(() => {
-        console.log("App mounted, initializing Farcaster SDK...");
-        const init = async () => {
-            if (typeof window !== 'undefined') {
-                try {
-                    console.log("Calling sdk.actions.ready()");
-                    await sdk.actions.ready();
-                    console.log("sdk.actions.ready() SUCCESS");
-                } catch (err) {
-                    console.error("Farcaster ready error:", err);
-                }
-            }
-        };
-
-        init();
-    }, []);
-
 
     return (
         <ToastProvider>

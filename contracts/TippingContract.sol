@@ -16,16 +16,16 @@ contract TippingContract is ITipping {
     using SafeERC20 for IERC20;
 
     // Storage mappings
-    mapping(address => uint256) public override tipsReceived;
-    mapping(address => uint256) public override tipsSent;
-    mapping(address => mapping(address => uint256)) public override creatorTokenTips;
-    mapping(address => Tip[]) public override creatorTips;
+    mapping(address => uint256) public tipsReceived;
+    mapping(address => uint256) public tipsSent;
+    mapping(address => mapping(address => uint256)) public creatorTokenTips;
+    mapping(address => ITipping.Tip[]) public creatorTips;
     
     // Prevent reentrancy
     mapping(address => bool) private _locked;
     
     // Constants
-    address private constant ETH_ADDRESS = address(0);
+    address public constant ETH_ADDRESS = address(0);
     uint256 private constant MAX_MESSAGE_LENGTH = 280;
     uint256 private constant MAX_RECENT_TIPS = 50;
     
@@ -80,7 +80,6 @@ contract TippingContract is ITipping {
         payable 
         nonReentrant 
         validAddress(creator)
-        validAddress(token)
         validMessage(message)
     {
         require(amount > 0, "Amount must be greater than 0");
@@ -100,10 +99,10 @@ contract TippingContract is ITipping {
         tipsSent[msg.sender] += amount;
         creatorTokenTips[creator][token] += amount;
         
-        // Store tip record - limit array growth for gas efficiency
+        // Store tip record - limit array growth
         uint256 tipCount = creatorTips[creator].length;
         if (tipCount < MAX_RECENT_TIPS) {
-            creatorTips[creator].push(Tip({
+            creatorTips[creator].push(ITipping.Tip({
                 tipper: msg.sender,
                 creator: creator,
                 token: token,
@@ -116,7 +115,7 @@ contract TippingContract is ITipping {
             for (uint256 i = 0; i < tipCount - 1; i++) {
                 creatorTips[creator][i] = creatorTips[creator][i + 1];
             }
-            creatorTips[creator][tipCount - 1] = Tip({
+            creatorTips[creator][tipCount - 1] = ITipping.Tip({
                 tipper: msg.sender,
                 creator: creator,
                 token: token,
@@ -138,7 +137,6 @@ contract TippingContract is ITipping {
     function withdraw(address token, uint256 amount) 
         external 
         nonReentrant
-        validAddress(token)
     {
         require(amount > 0, "Amount must be greater than 0");
         require(creatorTokenTips[msg.sender][token] >= amount, "Insufficient balance");
@@ -156,28 +154,57 @@ contract TippingContract is ITipping {
     }
     
     /**
+     * @notice Interface implementation for getTipsReceived
+     */
+    function getTipsReceived(address creator) external view override returns (uint256) {
+        return tipsReceived[creator];
+    }
+
+    /**
+     * @notice Interface implementation for getTipsSent
+     */
+    function getTipsSent(address tipper) external view override returns (uint256) {
+        return tipsSent[tipper];
+    }
+
+    /**
+     * @notice Interface implementation for getCreatorTotalTips
+     */
+    function getCreatorTotalTips(address creator, address token) external view override returns (uint256) {
+        return creatorTokenTips[creator][token];
+    }
+
+    /**
+     * @notice Interface implementation for getTipCount
+     */
+    function getTipCount(address creator) external view override returns (uint256) {
+        return creatorTips[creator].length;
+    }
+
+    /**
      * @notice Get recent tips for a creator (limited to save gas)
      */
     function getRecentTips(address creator, uint256 limit) 
         external 
         view 
+        override
         validAddress(creator) 
-        returns (Tip[] memory) 
+        returns (ITipping.Tip[] memory) 
     {
         uint256 tipCount = creatorTips[creator].length;
         uint256 resultLength = tipCount < limit ? tipCount : limit;
         resultLength = resultLength < MAX_RECENT_TIPS ? resultLength : MAX_RECENT_TIPS;
         
         if (resultLength == 0) {
-            return new Tip[](0);
+            return new ITipping.Tip[](0);
         }
         
         // Calculate starting index to get the most recent tips
         uint256 startIndex = tipCount - resultLength;
-        Tip[] memory recentTips = new Tip[](resultLength);
+        ITipping.Tip[] memory recentTips = new ITipping.Tip[](resultLength);
         
         for (uint256 i = 0; i < resultLength; i++) {
-            recentTips[i] = creatorTips[creator][startIndex + i];
+            recentTips[i] = creatorTips[creator][tipCount - 1 - i];
         }
         
         return recentTips;

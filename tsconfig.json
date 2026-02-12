@@ -10,7 +10,8 @@
     "module": "ESNext",
     "skipLibCheck": true,
     "types": [
-      "vite/client"
+      "vite/client",
+      "hardhat"
     ],
     /* Bundler mode */
     "moduleResolution": "bundler",
@@ -32,7 +33,10 @@
     }
   },
   "include": [
-    "src"
+    "src",
+    "test",
+    "scripts",
+    "hardhat.config.ts"
   ],
   "references": [
     {
