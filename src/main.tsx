@@ -6,13 +6,22 @@ import './globals.css';
 import sdk from '@farcaster/miniapp-sdk';
 
 // Trigger ready as early as possible to dismiss splash screen
-sdk.actions.ready();
+try {
+    if (typeof window !== 'undefined') {
+        sdk.actions.ready();
+    }
+} catch (e) {
+    console.error('Farcaster SDK ready error:', e);
+}
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-    <React.StrictMode>
-        <Providers>
-            <App />
-        </Providers>
-    </React.StrictMode>
-);
+const container = document.getElementById('root');
+if (container) {
+    ReactDOM.createRoot(container).render(
+        <React.StrictMode>
+            <Providers>
+                <App />
+            </Providers>
+        </React.StrictMode>
+    );
+}
 
