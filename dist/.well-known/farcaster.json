@@ -1,16 +1,15 @@
 {
-    "accountAssociation": {
-        "header": "eyJmaWQiOjkxOTkwOCwidHlwZSI6ImN1c3RvZHkiLCJrZXkiOiJMHJ8... (placeholder - needs real signature)",
-        "payload": "eyJkb21haW4iOiJ0aXAtZmF2LnZlcmNlbC5hcHAifQ",
-        "signature": "MHhk... (placeholder - needs real signature)"
-    },
+    "name": "TIP FAV",
+    "description": "Send instant on-chain tips to your favorite Farcaster creators. Fast, simple, built on Base.",
+    "icon": "https://tip-fav.vercel.app/icon.svg",
+    "url": "https://tip-fav.vercel.app",
     "frame": {
         "version": "1",
         "name": "TIP FAV",
-        "iconUrl": "https://tip-fav.vercel.app/icon.png",
         "homeUrl": "https://tip-fav.vercel.app",
-        "splashImageUrl": "https://tip-fav.vercel.app/splash.png",
-        "splashBackgroundColor": "#000000",
-        "webhookUrl": "https://tip-fav.vercel.app/api/webhook"
+        "imageUrl": "https://tip-fav.vercel.app/og-image.svg",
+        "buttonTitle": "Tip Creator",
+        "splashImageUrl": "https://tip-fav.vercel.app/splash.svg",
+        "splashBackgroundColor": "#0f172a"
     }
 }
