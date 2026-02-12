@@ -24,12 +24,6 @@
     "tagline": "Support creators instantly",
     "ogTitle": "TIP FAV Mini App",
     "ogDescription": "Send crypto tips easily inside Farcaster.",
-    "ogImageUrl": "https://tip-fav.vercel.app/og-image.png",
-    "heroImageUrl": "https://tip-fav.vercel.app/hero.png",
-    "screenshotUrls": [
-      "https://tip-fav.vercel.app/screenshot1.png",
-      "https://tip-fav.vercel.app/screenshot2.png"
-    ],
     "castShareUrl": "https://tip-fav.vercel.app"
   },
   "frame": {
@@ -52,12 +46,6 @@
     "tagline": "Support creators instantly",
     "ogTitle": "TIP FAV Mini App",
     "ogDescription": "Send crypto tips easily inside Farcaster.",
-    "ogImageUrl": "https://tip-fav.vercel.app/og-image.png",
-    "heroImageUrl": "https://tip-fav.vercel.app/hero.png",
-    "screenshotUrls": [
-      "https://tip-fav.vercel.app/screenshot1.png",
-      "https://tip-fav.vercel.app/screenshot2.png"
-    ],
     "castShareUrl": "https://tip-fav.vercel.app"
   }
 }
