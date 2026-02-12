@@ -4,13 +4,44 @@
     "payload": "eyJkb21haW4iOiJ0aXAtZmF2LnZlcmNlbC5hcHAifQ",
     "signature": "cxbbd8T/F2M1/GfEqz+FPQ2+vfiDnpbD6XUXtuXQeI9X8xCRixefV0bK2zHEU7ZnVFoE7rEA7OTgbXlov7Ua7hs="
   },
+  "miniapp": {
+    "version": "1",
+    "name": "TIP FAV",
+    "homeUrl": "https://tip-fav.vercel.app",
+    "iconUrl": "https://tip-fav.vercel.app/icon.svg",
+    "splashImageUrl": "https://tip-fav.vercel.app/splash.svg",
+    "splashBackgroundColor": "#0f172a",
+    "webhookUrl": "https://tip-fav.vercel.app/api/webhook",
+    "subtitle": "Instant on-chain tipping for Farcaster creators",
+    "tagline": "Support your favorite creators instantly on Base.",
+    "description": "TIP FAV is a decentralized tipping platform built on the Base network for the Farcaster community. It allows users to send instant on-chain tips (ETH/USDC) directly to creators, fostering a seamless social-commerce experience within the Farcaster ecosystem. No intermediaries, just pure value transfer.",
+    "ogTitle": "TIP FAV - The Best Way to Tip on Farcaster",
+    "ogDescription": "Support your favorite Farcaster creators with instant on-chain tips on Base.",
+    "ogImageUrl": "https://tip-fav.vercel.app/og-image.png",
+    "heroImageUrl": "https://tip-fav.vercel.app/hero.png",
+    "primaryCategory": "social",
+    "tags": [
+      "SocialFi",
+      "Creator Economy",
+      "Tipping",
+      "Base",
+      "Farcaster",
+      "Web3",
+      "Payments"
+    ],
+    "screenshotUrls": [
+      "https://tip-fav.vercel.app/screenshot1.png",
+      "https://tip-fav.vercel.app/screenshot2.png"
+    ],
+    "castShareUrl": "https://warpcast.com/~/compose?text=Tip%20your%20favorite%20creators%20with%20TIP%20FAV!&embeds[]=https://tip-fav.vercel.app"
+  },
   "frame": {
     "version": "1",
     "name": "TIP FAV",
     "homeUrl": "https://tip-fav.vercel.app",
-    "iconUrl": "https://tip-fav.vercel.app/icon.png",
-    "splashImageUrl": "https://tip-fav.vercel.app/splash.png",
-    "splashBackgroundColor": "#000000",
+    "iconUrl": "https://tip-fav.vercel.app/icon.svg",
+    "splashImageUrl": "https://tip-fav.vercel.app/splash.svg",
+    "splashBackgroundColor": "#0f172a",
     "webhookUrl": "https://tip-fav.vercel.app/api/webhook"
   }
 }
