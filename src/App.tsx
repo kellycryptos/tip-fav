@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import sdk from '@farcaster/frame-sdk';
 import { motion, AnimatePresence } from 'framer-motion';
 import { WalletConnect } from './components/WalletConnect';
 import { TipForm } from './components/TipForm';
@@ -8,7 +9,22 @@ import { ToastProvider } from './components/Toast';
 import { cn } from './lib/utils';
 
 export default function App() {
+    const [isSDKLoaded, setIsSDKLoaded] = useState(false);
     const [activeTab, setActiveTab] = useState<'tip' | 'profile' | 'leaderboard'>('tip');
+
+    useEffect(() => {
+        const load = async () => {
+            sdk.actions.ready();
+        };
+        if (sdk && !isSDKLoaded) {
+            setIsSDKLoaded(true);
+            load();
+        }
+    }, [isSDKLoaded]);
+
+    if (!isSDKLoaded) {
+        return <div>Loading...</div>;
+    }
 
     return (
         <ToastProvider>
