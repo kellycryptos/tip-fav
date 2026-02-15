@@ -8,43 +8,31 @@ import { Leaderboard } from './components/Leaderboard';
 import { ToastProvider } from './components/Toast';
 import { cn } from './lib/utils';
 
+console.log('App.tsx: Module execution start');
+
 export default function App() {
-    const [isSDKLoaded, setIsSDKLoaded] = useState(false);
     const [activeTab, setActiveTab] = useState<'tip' | 'profile' | 'leaderboard'>('tip');
 
     useEffect(() => {
+        console.log('App.tsx: useEffect mount');
         const load = async () => {
             try {
-                await sdk.actions.ready();
+                console.log('App.tsx: Calling sdk.actions.ready()...');
+                // Use a safety check for the sdk object structure
+                const sdkObj = (sdk as any)?.default || sdk;
+                if (sdkObj?.actions?.ready) {
+                    await sdkObj.actions.ready();
+                    console.log('App.tsx: sdk.actions.ready() called successfully');
+                } else {
+                    console.warn('App.tsx: sdk.actions.ready not found', sdkObj);
+                }
             } catch (e) {
-                console.error("SDK ready failed:", e);
+                console.error("App.tsx: SDK ready error:", e);
             }
         };
 
-        if (sdk && !isSDKLoaded) {
-            // Fallback timeout to ensure app renders in standard browsers
-            const timeout = setTimeout(() => {
-                setIsSDKLoaded(true);
-            }, 2000);
-
-            load().then(() => {
-                clearTimeout(timeout);
-                setIsSDKLoaded(true);
-            });
-        }
-    }, [isSDKLoaded]);
-
-    if (!isSDKLoaded) {
-        return (
-            <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white">
-                <div className="text-center">
-                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-500 mx-auto mb-4"></div>
-                    <p className="text-lg font-medium">Initializing Tip Fav...</p>
-                    <p className="text-sm text-gray-400 mt-2">Connecting to Farcaster...</p>
-                </div>
-            </div>
-        );
-    }
+        load();
+    }, []);
 
     return (
         <ToastProvider>
