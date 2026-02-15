@@ -14,16 +14,36 @@ export default function App() {
 
     useEffect(() => {
         const load = async () => {
-            sdk.actions.ready();
+            try {
+                await sdk.actions.ready();
+            } catch (e) {
+                console.error("SDK ready failed:", e);
+            }
         };
+
         if (sdk && !isSDKLoaded) {
-            setIsSDKLoaded(true);
-            load();
+            // Fallback timeout to ensure app renders in standard browsers
+            const timeout = setTimeout(() => {
+                setIsSDKLoaded(true);
+            }, 2000);
+
+            load().then(() => {
+                clearTimeout(timeout);
+                setIsSDKLoaded(true);
+            });
         }
     }, [isSDKLoaded]);
 
     if (!isSDKLoaded) {
-        return <div>Loading...</div>;
+        return (
+            <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white">
+                <div className="text-center">
+                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-500 mx-auto mb-4"></div>
+                    <p className="text-lg font-medium">Initializing Tip Fav...</p>
+                    <p className="text-sm text-gray-400 mt-2">Connecting to Farcaster...</p>
+                </div>
+            </div>
+        );
     }
 
     return (
